@@ -28,7 +28,7 @@
  */
 
 // Is the BLTouch option installed?
-//#define CR10V3_BLTOUCH
+#define CR10V3_BLTOUCH
 
 /**
  * Configuration.h
@@ -70,7 +70,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "Aaron Just, CR-10 V3)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "PYRE" // Who made the changes. // PYRE
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 // @section machine
@@ -596,13 +596,13 @@
 #endif
 
 #if HAS_E_TEMP_SENSOR
-  #define TEMP_RESIDENCY_TIME          5  // (seconds) Time to wait for hotend to "settle" in M109
+  #define TEMP_RESIDENCY_TIME         10  // (seconds) Time to wait for hotend to "settle" in M109 // PYRE
   #define TEMP_WINDOW                  1  // (°C) Temperature proximity for the "temperature reached" timer
   #define TEMP_HYSTERESIS              3  // (°C) Temperature proximity considered "close enough" to the target
 #endif
 
 #if TEMP_SENSOR_BED
-  #define TEMP_BED_RESIDENCY_TIME      8  // (seconds) Time to wait for bed to "settle" in M190
+  #define TEMP_BED_RESIDENCY_TIME     10  // (seconds) Time to wait for bed to "settle" in M190
   #define TEMP_BED_WINDOW              1  // (°C) Temperature proximity for the "temperature reached" timer
   #define TEMP_BED_HYSTERESIS          3  // (°C) Temperature proximity considered "close enough" to the target
 #endif
@@ -698,9 +698,9 @@
     #define DEFAULT_Ki_LIST {   1.59,   1.59 }
     #define DEFAULT_Kd_LIST {  59.40,  59.40 }
   #else
-    #define DEFAULT_Kp  19.47
-    #define DEFAULT_Ki   1.59
-    #define DEFAULT_Kd  59.40
+    #define DEFAULT_Kp  21.59 // PYRE
+    #define DEFAULT_Ki   1.77 // PYRE
+    #define DEFAULT_Kd  65.87 // PYRE
   #endif
 #else
   #define BANG_MAX 255    // Limit hotend current while in bang-bang mode; 255=full current
@@ -789,9 +789,9 @@
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
   // CR-10 V3 24V 240W
-  #define DEFAULT_bedKp 690.34
-  #define DEFAULT_bedKi 111.47
-  #define DEFAULT_bedKd 1068.83
+  #define DEFAULT_bedKp 216.71 // PYRE
+  #define DEFAULT_bedKi 27.27 // PYRE
+  #define DEFAULT_bedKd 1148.06 // PYRE
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #else
@@ -1243,18 +1243,18 @@
  *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
  * Updated E Steps to 382.14 for CR-10 V3 Direct Drive
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.00, 80.00, 400.00, 407 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.00, 80.00, 400.00, 411.8 } // PYRE
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 200, 200, 14, 25 }
+#define DEFAULT_MAX_FEEDRATE          { 200, 200, 14, 25 } // PYRE
 
 #define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
-  #define MAX_FEEDRATE_EDIT_VALUES    { 200, 200, 14, 25 } // ...or, set your own edit limits
+  #define MAX_FEEDRATE_EDIT_VALUES    { 200, 200, 14, 25 } // ...or, set your own edit limits // PYRE
 #endif
 
 /**
@@ -1586,14 +1586,14 @@
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
-#define PROBING_MARGIN 10
-#define PROBING_MARGIN_LEFT 45
+#define PROBING_MARGIN 45 // PYRE
+//define PROBING_MARGIN_LEFT 45
 
 // X and Y axis travel speed (mm/min) between probes
-#define XY_PROBE_FEEDRATE (200*60)
+#define XY_PROBE_FEEDRATE (200*60) // PYRE
 
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_FEEDRATE_FAST (14*60)
+#define Z_PROBE_FEEDRATE_FAST (10*60) // PYRE
 
 // Feedrate (mm/min) for the "accurate" probe of each point
 #define Z_PROBE_FEEDRATE_SLOW (Z_PROBE_FEEDRATE_FAST / 2)
@@ -1816,8 +1816,8 @@
 #define Y_BED_SIZE 300 // Nozzle is at Y0 when homed
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
-#define X_MIN_POS -5 // -5 instead of 0 to center the print area (CR-10 v3)
-#define Y_MIN_POS -5 // -5 instead of 0 to center the print area (CR-10 v3)
+#define X_MIN_POS -5 // PYRE -5 instead of 0 to center the print area (CR-10 v3)
+#define Y_MIN_POS -5 // PYRE -5 instead of 0 to center the print area (CR-10 v3)
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
@@ -2133,7 +2133,7 @@
 
     // Beyond the probed grid, continue the implied tilt?
     // Default is to maintain the height of the nearest edge.
-    //#define EXTRAPOLATE_BEYOND_GRID
+    #define EXTRAPOLATE_BEYOND_GRID // PYRE
 
     //
     // Subdivision of the grid by Catmull-Rom method.
@@ -2226,12 +2226,12 @@
   #define BED_TRAMMING_INSET_LFRB { 45, 45, 45, 45 } // (mm) Left, Front, Right, Back insets
   #define BED_TRAMMING_HEIGHT      0.0        // (mm) Z height of nozzle at tramming points
   #define BED_TRAMMING_Z_HOP       4.0        // (mm) Z height of nozzle between tramming points
-  #define BED_TRAMMING_INCLUDE_CENTER         // Move to the center after the last corner
+  // #define BED_TRAMMING_INCLUDE_CENTER         // Move to the center after the last corner
   #if ENABLED(CR10V3_BLTOUCH)
     #define BED_TRAMMING_USE_PROBE
   #endif
   #if ENABLED(BED_TRAMMING_USE_PROBE)
-    #define BED_TRAMMING_PROBE_TOLERANCE 0.1  // (mm)
+    #define BED_TRAMMING_PROBE_TOLERANCE 0.05  // (mm) // PYRE
     #define BED_TRAMMING_VERIFY_RAISED        // After adjustment triggers the probe, re-probe to verify
     //#define BED_TRAMMING_AUDIO_FEEDBACK
   #endif
@@ -2253,7 +2253,7 @@
    *  |  1       2  |   | 1         4 |    | 1         2 |   | 2           |
    *  LF --------- RF   LF --------- RF    LF --------- RF   LF --------- RF
    */
-  #define BED_TRAMMING_LEVELING_ORDER { LF, RF, RB, LB }
+  #define BED_TRAMMING_LEVELING_ORDER { RF, LF, LB, RB } // PYRE
 #endif
 
 /**
@@ -2414,16 +2414,16 @@
 // Preheat Constants - Up to 10 are supported without changes
 //
 #define PREHEAT_1_LABEL       "PLA"
-#define PREHEAT_1_TEMP_HOTEND 205
-#define PREHEAT_1_TEMP_BED     60
+#define PREHEAT_1_TEMP_HOTEND 205 
+#define PREHEAT_1_TEMP_BED     50 // PYRE
 #define PREHEAT_1_TEMP_CHAMBER 35
-#define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
+#define PREHEAT_1_FAN_SPEED     50 // Value from 0 to 255  // PYRE
 
 #define PREHEAT_2_LABEL       "PETG"
 #define PREHEAT_2_TEMP_HOTEND 230
-#define PREHEAT_2_TEMP_BED    80
+#define PREHEAT_2_TEMP_BED    60 // PYRE
 #define PREHEAT_2_TEMP_CHAMBER 35
-#define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
+#define PREHEAT_2_FAN_SPEED     50 // Value from 0 to 255 // PYRE
 
 // @section motion
 

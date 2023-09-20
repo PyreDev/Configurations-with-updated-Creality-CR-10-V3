@@ -1082,17 +1082,17 @@
 #endif
 #if ENABLED(ASSISTED_TRAMMING)
 
-  // Define from 3 to 9 points to probe.
-  #define TRAMMING_POINT_XY { {  45, 20 }, { 280,  20 }, { 280, 280 }, { 45, 280 } }
+  // Define positions for probe points.
+  #define TRAMMING_POINT_XY { { 255, 45 }, { 45, 45 }, { 255, 45 }, { 255, 255 } }  // PYRE
 
   // Define position names for probe points.
-  #define TRAMMING_POINT_NAME_1 "Front-Left"
-  #define TRAMMING_POINT_NAME_2 "Front-Right"
-  #define TRAMMING_POINT_NAME_3 "Back-Right"
-  #define TRAMMING_POINT_NAME_4 "Back-Left"
+  #define TRAMMING_POINT_NAME_1 "Front-Right"  // PYRE
+  #define TRAMMING_POINT_NAME_2 "Front-Left"  // PYRE
+  #define TRAMMING_POINT_NAME_3 "Back-Left"  // PYRE
+  #define TRAMMING_POINT_NAME_4 "Back-Right"  // PYRE
 
   #define RESTORE_LEVELING_AFTER_G35    // Enable to restore leveling setup after operation
-  //#define REPORT_TRAMMING_MM          // Report Z deviation (mm) for each point relative to the first
+  #define REPORT_TRAMMING_MM          // Report Z deviation (mm) for each point relative to the first // PYRE
 
   #define ASSISTED_TRAMMING_WIZARD    // Add a Tramming Wizard to the LCD menu
 
@@ -1678,7 +1678,7 @@
 
   // Reverse SD sort to show "more recent" files first, according to the card's FAT.
   // Since the FAT gets out of order with usage, SDCARD_SORT_ALPHA is recommended.
-  #define SDCARD_RATHERRECENTFIRST
+  // #define SDCARD_RATHERRECENTFIRST   // PYRE
 
   #define SD_MENU_CONFIRM_START             // Confirm the selected SD file before printing
 
@@ -4393,8 +4393,8 @@
 #if ENABLED(PRINTCOUNTER)
   #define SERVICE_WARNING_BUZZES  3
   // Activate up to 3 service interval watchdogs
-  #define SERVICE_NAME_1      "Service 50h"
-  #define SERVICE_INTERVAL_1  50 // print hours
+  //#define SERVICE_NAME_1      "Service 50h"
+  //#define SERVICE_INTERVAL_1  50 // print hours
   #define SERVICE_NAME_2      "Service 300h"
   #define SERVICE_INTERVAL_2  300 // print hours
   //#define SERVICE_NAME_3      "Service 3"
